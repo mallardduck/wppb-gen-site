@@ -78,7 +78,7 @@ app.route('/')
 			}
 
 			//RENAME THE MAIN PLUGIN DIRECTORY
-			fs.renameSync( destination + '/plugin-name', destination + '/' + pluginSlug);
+			fs.renameSync( destination + '/wp-plugin-bp', destination + '/' + pluginSlug);
 
 			//FIND AND REPLACE FILES NAMES
 			walker(destination + '/' + pluginSlug, function(err, files) {
@@ -95,7 +95,7 @@ app.route('/')
 
 					var newName;
 
-					var re = /plugin-name/gi;
+					var re = /wp-plugin-bp/gi;
 
 					newName = file.replace(re, pluginSlug);
 
@@ -106,13 +106,13 @@ app.route('/')
 				// Plugin URI
 				replace({
 
-					regex: "http://example.com/plugin-name-uri/",
+					regex: "https://wordpress.com/plugin-name-uri/",
 
 					replacement: pluginURI,
 
 					paths:[destination + '/' + pluginSlug + '/' + pluginSlug +'.php'],
 
-					recursive: false,
+					recursive: true,
 
 					silent: true
 
@@ -125,22 +125,7 @@ app.route('/')
 
 					replacement: pluginName,
 
-					paths:[destination + '/' + pluginSlug + '/' + pluginSlug +'.php'],
-
-					recursive: true,
-
-					silent: true
-
-				});
-
-				//Plugin URI
-				replace({
-
-					regex: "http://example.com/plugin-name-uri/",
-
-					replacement: pluginURI,
-
-					paths:[destination + '/' + pluginSlug + '/' + pluginSlug +'.php'],
+					paths:[destination + '/' + pluginSlug + '/'],
 
 					recursive: true,
 
@@ -166,7 +151,7 @@ app.route('/')
 				//find Plugin Author Full
 				replace({
 
-					regex: "Your Name <email@example.com>",
+					regex: "Your Name <email@example.tld>",
 
 					replacement: pluginAuthorFull,
 
@@ -181,7 +166,7 @@ app.route('/')
 				//find Plugin_Name
 				replace({
 
-					regex: "Plugin_Name",
+					regex: "Wp_Plugin_Bp",
 
 					replacement: pluginNamePackage,
 
@@ -196,7 +181,7 @@ app.route('/')
 				//find Plugin slug
 				replace({
 
-					regex: "plugin-name",
+					regex: "wp-plugin-bp",
 
 					replacement: pluginSlug,
 
@@ -211,7 +196,7 @@ app.route('/')
 				//find Author URI
 				replace({
 
-					regex: "http://example.com/?",
+					regex: "http://example.tld/?",
 
 					replacement: pluginAuthorURI,
 
@@ -226,7 +211,7 @@ app.route('/')
 				//find Author URI
 				replace({
 
-					regex: "plugin_name",
+					regex: "wp_plugin_bp",
 
 					replacement: pluginNameInstance,
 
@@ -285,7 +270,7 @@ clean.start();
  */
 var getSourceCode = function(){
 
-	var repo = {user: 'DevinVinson', repo: 'WordPress-Plugin-Boilerplate', ref: 'master'};
+	var repo = {user: 'mallardduck', repo: 'WordPress-Plugin-Boilerplate', ref: 'master'};
 
 	var destination = process.cwd() + "/source/";
 
